@@ -4,13 +4,19 @@ from app.api.views import blueprint as api_blueprint
 from app.main.views import blueprint as main_blueprint
 from app.posts.views import blueprint as post_blueprint
 
-app = Flask(__name__)
 
-app.config['JSON_AS_ASCII'] = False
+def create_app():
+    app = Flask(__name__)
 
-app.register_blueprint(api_blueprint)
-app.register_blueprint(main_blueprint)
-app.register_blueprint(post_blueprint)
+    app.config['JSON_AS_ASCII'] = False
+
+    app.register_blueprint(api_blueprint)
+    app.register_blueprint(main_blueprint)
+    app.register_blueprint(post_blueprint)
+    return app
+
+
+app = create_app()
 
 
 @app.errorhandler(404)
